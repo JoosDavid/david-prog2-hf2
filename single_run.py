@@ -139,7 +139,7 @@ class SolutionRunner:
             ("compute", self.dump_query),
         ]:
             prep()
-            logs.append(f"{comm}: {self.call(comm):.6f}")
+            logs.append(f"{comm}: {(100 * self.call(comm)):.2f}ms")
         self.in_p.unlink()
         self.q_p.unlink()
         self.call("cleanup")
@@ -174,7 +174,7 @@ class SolutionRunner:
                 print(f"{self.solution}:\n{out_df[misses]}")
                 print(f"{self.comparison}:\n{comp_df[misses]}")
 
-        logstr = "\n".join(logs)
+        logstr = "\t".join(logs)
         RUNS_DIR.mkdir(parents=True, exist_ok=True)
         (RUNS_DIR / f"{time.time():.6f}-{self.solution}").write_text(logstr)
         print(f"\nsuccess! solution: {self.solution}")

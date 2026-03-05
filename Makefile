@@ -1,4 +1,5 @@
 .PHONY: run-all comp-table run clean-logs
+.SILENT:
 
 MAKEFLAGS += --no-print-directory
 
