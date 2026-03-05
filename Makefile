@@ -1,5 +1,7 @@
 .PHONY: run-all comp-table run clean-logs
 
+MAKEFLAGS += --no-print-directory
+
 run-all:
 	uv run python collective_run.py
 
