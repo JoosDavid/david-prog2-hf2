@@ -1,0 +1,1 @@
+inputs: 10000	queries: 100	setup: 5.91ms	preproc: 58.65ms	compute: 19.03ms
