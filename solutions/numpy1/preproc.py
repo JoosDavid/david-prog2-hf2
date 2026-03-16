@@ -1,9 +1,8 @@
 import pickle
 import numpy as np
-from scipy.spatial import cKDTree
 import csv
 
-OUTPUT = "genre_kdtrees.pkl"
+OUTPUT = "genre_arrays.pkl"
 
 with open("input.csv", "r", encoding="utf-8") as f:
     reader = csv.DictReader(f)
@@ -29,26 +28,18 @@ for g in genres:
 index = {}
 
 for genre, data in buckets.items():
-
-    coords = data["coords"].astype(np.float32)
-    years = data["years"].astype(np.int32)
-    meta = data["meta"]
-
+    coords = np.array(data["coords"], dtype=np.float32)
+    years = np.array(data["years"], dtype=np.int32)
+    meta = np.array(data["meta"])
     if len(coords) == 0:
         continue
-
-    tree = cKDTree(coords)
-
     index[genre] = {
-        "tree": tree,
         "coords": coords,
         "years": years,
         "meta": meta
     }
 
-print(f"Built trees for {len(index)} genres")
-
 with open(OUTPUT, "wb") as f:
     pickle.dump(index, f)
 
-print("Saved genre_kdtrees.pkl")
+print(f"Saved {len(index)} genres to {OUTPUT}")

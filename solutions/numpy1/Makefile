@@ -1,5 +1,5 @@
 setup:
-	pip install -r requirements.txt
+	uv pip install numpy
 
 preproc:
 	python preproc.py
